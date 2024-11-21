@@ -30,9 +30,9 @@ include_once "modules/navbar.php";
             case 2:
                 include_once "getroles/GetPreceptoryRol.php";
                 break;
-            /*case 3:
-                include_once "getroles/GetStudentRol.php";
-                break; */
+            case 4:
+                include_once "getroles/GetTeacherRol.php";
+                break;
         }
     } else {
         include "views/pages/home.php";     
