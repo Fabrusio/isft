@@ -1,4 +1,4 @@
-function generateUser(userId) {
+function generateUserTeacher(userId) {
     Swal.fire({
         title: '¿Estás seguro?',
         text: '¿Deseas generar un nuevo usuario para este docente?',

@@ -35,7 +35,7 @@ class MailerController
         $mail->CharSet = 'UTF-8';
         $mail->Subject = "¡Tu cuenta ha sido activada!";
 
-        $htmlFile = '../views/html/activateAccount.html';
+        $htmlFile = 'views/html/activateAccount.html';
 
 
         $htmlContent = file_get_contents($htmlFile);
