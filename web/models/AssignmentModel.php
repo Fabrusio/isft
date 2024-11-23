@@ -188,8 +188,8 @@ static public function studentSubejectNoAssig($id_student, $id_subject)
 
 static public function deleteTeacherSubject($id_teacher, $id_subject){
 
-    $sql = "DELETE FROM asignament_teachers AS at
-            WHERE at.fk_user_id = :id_teacher && at.fk_subject_id = :id_subject;";
+    $sql = "DELETE FROM asignament_teachers
+            WHERE fk_user_id = :id_teacher && fk_subject_id = :id_subject;";
 
 $stmt = model_sql::connectToDatabase()->prepare($sql);
 $stmt->bindParam(':id_teacher', $id_teacher, PDO::PARAM_INT); 
