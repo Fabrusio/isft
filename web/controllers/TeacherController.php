@@ -212,4 +212,10 @@ class TeacherController
             }
         }
     }
+
+    static public function getMySubjects($id)
+    {
+        return TeacherModel::getMySubjects($id);
+    }
+
 }
