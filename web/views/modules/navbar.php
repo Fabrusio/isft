@@ -20,9 +20,17 @@
                     <a class="dropdown-item" href="index.php?pages=myData">
                         <i class="fas fa-id-card"></i> Mis datos
                     </a>
+                <?php if($_SESSION['fk_rol_id'] == 4): ?>
+                <a class="dropdown-item" href="#" download="">
+                    <i class="fas fa-book"></i> Descargar manual de usuario
+                </a>
+                <?php endif;?>
+
+                <?php if($_SESSION['fk_rol_id'] != 4): ?>
                     <a class="dropdown-item" href="/public/img/Manual de uso - ISFT 177.pdf" download="Manual de uso - ISFT 177">
                         <i class="fas fa-book"></i> Descargar manual de usuario
                     </a>
+                <?php endif;?>
                     <a class="dropdown-item" href="index.php?pages=changePassword">
                         <i class="fas fa-key"></i> Cambiar contraseña
                     </a>
