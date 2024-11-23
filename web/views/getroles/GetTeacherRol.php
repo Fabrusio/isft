@@ -2,24 +2,11 @@
 
 if (
       ($_GET['pages'] == "home") ||
-      # links administracion de carreras
-      ($_GET['pages'] == "") ||
-      ($_GET['pages'] == "") ||
-      ($_GET['pages'] == "") ||
-      ($_GET['pages'] == "") ||
-          
-      ($_GET['pages'] == "") ||
-      ($_GET['pages'] == "") ||
-      ($_GET['pages'] == "") ||
-      ($_GET['pages'] == "") ||
-         
-      ($_GET['pages'] == "") ||
-      ($_GET['pages'] == "") ||
+      # links administracion de materias
+      ($_GET['pages'] == "mySubjects") ||
       # links administracion de Usuarios    
       ($_GET['pages'] == "myData") ||
       ($_GET['pages'] == "changedPasswordStart") ||
-      ($_GET['pages'] == "") ||
-      ($_GET['pages'] == "") || 
 # links simples
       ($_GET['pages'] == "changePassword") 
     ) { 

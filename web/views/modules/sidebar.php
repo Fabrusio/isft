@@ -37,8 +37,8 @@
                 }
                 ?>
                 <?php
-                if ($_SESSION['fk_rol_id'] == 3) {
-                    include_once "sidebarStudent.php";
+                if ($_SESSION['fk_rol_id'] == 4) {
+                    include_once "sidebarTeacher.php";
                 }
 
                 ?>
