@@ -81,4 +81,26 @@ class TeacherModel extends UserModel
         }
         $stmt = null;
     }
+    static public function getMySubjects($id)
+    {
+        $sql = "SELECT ate.fk_subject_id, ate.state, s.name_subject, ys.year, c.career_name
+                FROM asignament_teachers AS ate
+                INNER JOIN subjects AS s ON ate.fk_subject_id = s.id_subject
+                INNER JOIN yearSubject AS ys ON s.fk_year_subject = ys.id_year_subject
+                INNER JOIN careers AS c ON s.fk_career_id = c.id_career
+                WHERE ate.fk_user_id = ?";
+        
+        $stmt = model_sql::connectToDatabase()->prepare($sql);
+        $stmt->bindParam(1, $id, PDO::PARAM_INT);
+
+        if ($stmt->execute()) {
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } else {
+            print_r($stmt->errorInfo());
+            return false;
+        }
+        $stmt = null;
+    }
+
+
 }
