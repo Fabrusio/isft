@@ -1,6 +1,5 @@
 <?php 
 $dataSubjects = TeacherController::getMySubjects($_SESSION['id_user']); 
-if (!isset($_GET['subfolder']) || $_GET['subfolder'] != 'manageStudentSubject') {
 ?>
         <div class="card">
             <div class="card-body">
@@ -23,7 +22,7 @@ if (!isset($_GET['subfolder']) || $_GET['subfolder'] != 'manageStudentSubject') 
 
                                     <?php if (isset($_GET['pages']) && ($_GET['pages'] == 'mySubjects')) : ?>
                                         <td class="text-center">
-                                            <a href="index.php?pages=mySubjects&id_subject=<?php echo $subjects['fk_subject_id']; ?>&name_subject=<?php echo $subjects['name_subject']; ?>&subfolder=manageStudentSubject" class="btn btn-dark" title="Administrar">
+                                            <a href="index.php?pages=manageStudentSubject&id_subject=<?php echo $subjects['fk_subject_id']; ?>&name_subject=<?php echo $subjects['name_subject']; ?>" class="btn btn-dark" title="Administrar">
                                                 <i class="fas fa-user-tag"></i>
                                             </a>
                                         </td>
@@ -35,12 +34,3 @@ if (!isset($_GET['subfolder']) || $_GET['subfolder'] != 'manageStudentSubject') 
                 </div>
             </div>
         </div>
-<?php } ?>
-
-<?php
-    if (isset($_GET['subfolder'])) {
-        if ($_GET['subfolder'] == 'manageStudentSubject') {
-            include "views/subfolder/" . $_GET['subfolder'] . ".php";
-        }
-    }
-?>
