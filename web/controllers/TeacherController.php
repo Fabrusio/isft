@@ -218,4 +218,8 @@ class TeacherController
         return TeacherModel::getMySubjects($id);
     }
 
+    static public function getAllSubjectStudents($id_subject){
+        return TeacherModel::getAllSubjectStudents($id_subject);
+    }
+
 }

@@ -102,5 +102,43 @@ class TeacherModel extends UserModel
         $stmt = null;
     }
 
+    static public function getAllSubjectStudents($id_subject)
+    {
+        $currentYear = date('Y'); 
+        $sql = "SELECT
+            users.id_user AS id_student,
+            users.name AS name_student,
+            users.last_name AS last_name_student,
+            c.note1 as nota1,
+            c.note2 as nota2,
+            c.recuperatory1 as recuperatorio1,
+            c.recuperatory2 as recuperatorio2,
+            c.cycle_year as ciclo_lectivo,
+            c.state as estado_cursada,
+            users.fk_rol_id AS fk_rol_id,
+             users.file as file_number
+            FROM users
+            JOIN asignament_students as ass ON ass.fk_user_id = users.id_user
+            JOIN cursada as c ON c.id_asignementStudent = ass.id
+            WHERE 
+            users.fk_rol_id = 3
+            AND users.state IN (1, 2) 
+            AND c.state = 1 
+            AND c.cycle_year = :currentYear 
+            AND ass.fk_subject_id = :fk_subject_id";
+    
+        $stmt = model_sql::connectToDatabase()->prepare($sql);
+        $stmt->bindParam(':fk_subject_id', $id_subject, PDO::PARAM_INT);
+        $stmt->bindParam(':currentYear', $currentYear, PDO::PARAM_INT);
+        
+        if ($stmt->execute()) {
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } else {
+            print_r($stmt->errorInfo());
+        }
+    
+        $stmt = null;
+    }
+
 
 }
