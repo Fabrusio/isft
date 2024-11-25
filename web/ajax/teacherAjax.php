@@ -19,6 +19,11 @@ class TeacherAjax {
             $result = $teacher->editTeacher();
             echo json_encode($result, JSON_UNESCAPED_UNICODE);
         }
+        public function assignAttendance() {
+            $teacher = new TeacherController();
+            // $result = $teacher->getAllDataAttendance($_POST['id_subject'], $_POST['id_month'],$_GET['id_teacher']);
+            // echo json_encode($result, JSON_UNESCAPED_UNICODE);
+        }
 
 }
 
@@ -29,4 +34,7 @@ if(isset($_POST['action']) && $_POST['action'] == 'newteacher'){
 
         $var = new TeacherAjax();
         $var->editTeacher();
+}else if(isset($_POST['action']) && $_POST['action'] == 'assignattendance'){
+    $var = new TeacherAjax();
+    $var->assignAttendance();
 }

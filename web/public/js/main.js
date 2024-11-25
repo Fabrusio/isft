@@ -142,4 +142,6 @@ $(document).ready(function () {
   handleFormSubmit("#closeExamForm", "/ajax/finalAjax.php", "closeExamTable");
 
   handleFormSubmit("#finish", "/ajax/courseAjax.php", "finish");
+
+  handleFormSubmit("#assignattendance", "/ajax/teacherAjax.php", "assignattendance");
 });
