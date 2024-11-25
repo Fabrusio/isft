@@ -222,4 +222,19 @@ class TeacherController
         return TeacherModel::getAllSubjectStudents($id_subject);
     }
 
+    static public function getAllMonths(){
+        return TeacherModel::getAllMonths();
+    }
+
+    static public function getSchedule($id_subject){
+        return TeacherModel::getSchedule($id_subject);
+    }
+
+    public static function getAllDataAttendance($idSubject, $idMonth, $idTeacher) {
+        $attendance = TeacherModel::fetchAttendance($idSubject, $idMonth, $idTeacher);
+        return $attendance; // Esto ya retorna el valor esperado
+    }
+    
+    
+
 }

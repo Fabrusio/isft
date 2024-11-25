@@ -140,5 +140,71 @@ class TeacherModel extends UserModel
         $stmt = null;
     }
 
+    static public function getAllMonths()
+    {
+        $sql = "SELECT
+        months.id_month AS id_month,
+        months.name AS name_month
+        FROM months";
+
+        $stmt = model_sql::connectToDatabase()->prepare($sql);
+
+        if ($stmt->execute()) {
+
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } else {
+
+            print_r($stmt->errorInfo());
+        }
+
+        $stmt = null;
+    }
+
+    static public function getSchedule($id_subject){
+        $sql = "SELECT
+        subjects.details AS hs_subject
+        FROM subjects
+        WHERE
+        subjects.id_subject = :id_subject";
+
+        $stmt = model_sql::connectToDatabase()->prepare($sql);
+
+        if ($stmt->execute()) {
+
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } else {
+
+            print_r($stmt->errorInfo());
+        }
+
+        $stmt = null;
+    }
+
+    public static function fetchAttendance($idSubject, $idMonth, $idTeacher) {
+        $sql = "SELECT monthly_attendance
+                FROM teacher_attendances
+                WHERE fk_subject_id = :id_subject 
+                  AND fk_month_id = :id_month 
+                  AND fk_teacher_id = :id_teacher";
+    
+        try {
+            $stmt = model_sql::connectToDatabase()->prepare($sql);
+            $stmt->bindParam(':id_subject', $idSubject, PDO::PARAM_INT);
+            $stmt->bindParam(':id_month', $idMonth, PDO::PARAM_INT);
+            $stmt->bindParam(':id_teacher', $idTeacher, PDO::PARAM_INT);
+    
+            $stmt->execute();
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+            $stmt = null;
+            return $result ? $result['monthly_attendance'] : 0;
+        } catch (PDOException $e) {
+            error_log("Error en fetchAttendance: " . $e->getMessage());
+            return null;
+        }
+    }
+    
+    
+    
 
 }
