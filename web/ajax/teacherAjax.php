@@ -19,10 +19,16 @@ class TeacherAjax {
             $result = $teacher->editTeacher();
             echo json_encode($result, JSON_UNESCAPED_UNICODE);
         }
-        public function assignAttendance() {
+        public function insertAttendance() {
             $teacher = new TeacherController();
-            // $result = $teacher->getAllDataAttendance($_POST['id_subject'], $_POST['id_month'],$_GET['id_teacher']);
-            // echo json_encode($result, JSON_UNESCAPED_UNICODE);
+            $result = $teacher->insertAttendance($_POST['id_subject'], $_POST['id_month'], $_POST['id_teacher'], $_POST['attendance']);
+            echo json_encode($result, JSON_UNESCAPED_UNICODE);
+        }
+
+        public function editAttendance() {
+            $teacher = new TeacherController();
+            $result = $teacher->editAttendance($_POST['attendance'], $_POST['id_teacher_attendance']);
+            echo json_encode($result, JSON_UNESCAPED_UNICODE);
         }
 
 }
@@ -34,7 +40,10 @@ if(isset($_POST['action']) && $_POST['action'] == 'newteacher'){
 
         $var = new TeacherAjax();
         $var->editTeacher();
-}else if(isset($_POST['action']) && $_POST['action'] == 'assignattendance'){
+}else if(isset($_POST['action']) && $_POST['action'] == 'insertattendance'){
     $var = new TeacherAjax();
-    $var->assignAttendance();
+    $var->insertAttendance();
+}else if(isset($_POST['action']) && $_POST['action'] == 'editattendance'){
+    $var = new TeacherAjax();
+    $var->editAttendance();
 }

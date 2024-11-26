@@ -143,5 +143,7 @@ $(document).ready(function () {
 
   handleFormSubmit("#finish", "/ajax/courseAjax.php", "finish");
 
-  handleFormSubmit("#assignattendance", "/ajax/teacherAjax.php", "assignattendance");
+  handleFormSubmit("#insertattendance", "/ajax/teacherAjax.php", "insertattendance");
+
+  handleFormSubmit("#editattendance", "/ajax/teacherAjax.php", "editattendance");
 });
