@@ -222,4 +222,73 @@ class TeacherController
         return TeacherModel::getAllSubjectStudents($id_subject);
     }
 
+    static public function getAllMonths(){
+        return TeacherModel::getAllMonths();
+    }
+
+    static public function getSchedule($id_subject){
+        return TeacherModel::getSchedule($id_subject);
+    }
+
+    public static function getAllDataAttendance($idSubject, $idMonth, $idTeacher) {
+        $attendance = TeacherModel::fetchAttendance($idSubject, $idMonth, $idTeacher);
+        return $attendance;
+    }
+
+    public static function insertAttendance($id_subject, $id_month, $id_teacher, $attendance){
+        
+        if($attendance > 40){
+            $response["status"] = "error";
+            $response["message"] = "Ingrese una cantidad de horas menor.";
+            return $response;
+        }
+
+        if($attendance < 0){
+            $response["status"] = "error";
+            $response["message"] = "No se pueden ingresar valores negativos.";
+            return $response;
+        }
+        
+        $execute = TeacherModel::insertAttendance($id_subject, $id_month, $id_teacher, $attendance);
+
+        if ($execute) {
+            $response['title'] = "¡Actualizado!";
+            $response["status"] = "successLoad";
+            $response["message"] = "Se guardaron los datos correctamente.";
+            return $response;
+        } else {
+            $response["status"] = "error";
+            $response["message"] = "Hubo un problema en el ingreso.";
+            return $response;
+        }
+    }
+    
+    public static function editAttendance($attendance, $id){
+        
+        if($attendance > 40){
+            $response["status"] = "error";
+            $response["message"] = "Ingrese una cantidad de horas menor.";
+            return $response;
+        }
+
+        if($attendance < 0){
+            $response["status"] = "error";
+            $response["message"] = "No se pueden ingresar valores negativos.";
+            return $response;
+        }
+        
+        $execute = TeacherModel::editAttendance($attendance, $id);
+
+        if ($execute) {
+            $response['title'] = "¡Actualizado!";
+            $response["status"] = "successLoad";
+            $response["message"] = "Se guardaron los datos correctamente.";
+            return $response;
+        } else {
+            $response["status"] = "error";
+            $response["message"] = "Hubo un problema en el ingreso.";
+            return $response;
+        }
+    }
+
 }

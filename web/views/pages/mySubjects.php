@@ -22,6 +22,9 @@ $dataSubjects = TeacherController::getMySubjects($_SESSION['id_user']);
 
                                     <?php if (isset($_GET['pages']) && ($_GET['pages'] == 'mySubjects')) : ?>
                                         <td class="text-center">
+                                            <a href="index.php?pages=myAttendance&id_subject=<?php echo $subjects['fk_subject_id']; ?>&name_subject=<?php echo $subjects['name_subject']; ?>&id_teacher=<?php echo $_SESSION['id_user']; ?>" class="btn btn-primary" title="Mi asistencia">
+                                                <i class="fas fa-clock"></i>
+                                            </a>
                                             <a href="index.php?pages=manageStudentSubject&id_subject=<?php echo $subjects['fk_subject_id']; ?>&name_subject=<?php echo $subjects['name_subject']; ?>" class="btn btn-dark" title="Administrar">
                                                 <i class="fas fa-user-tag"></i>
                                             </a>
