@@ -237,4 +237,28 @@ class TeacherModel extends UserModel
         $stmt = null;
     }
 
+    public static function fetchStudentAttendance($idSubject, $idMonth, $idStudent) {
+        $sql = "SELECT monthly_attendance, id_student_attendance
+                FROM student_attendances
+                WHERE fk_subject_id = :id_subject 
+                  AND fk_month_id = :id_month 
+                  AND fk_student_id = :id_student";
+    
+        try {
+            $stmt = model_sql::connectToDatabase()->prepare($sql);
+            $stmt->bindParam(':id_subject', $idSubject, PDO::PARAM_INT);
+            $stmt->bindParam(':id_month', $idMonth, PDO::PARAM_INT);
+            $stmt->bindParam(':id_student', $idStudent, PDO::PARAM_INT);
+    
+            $stmt->execute();
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+            $stmt = null;
+            return $result;
+        } catch (PDOException $e) {
+            error_log("Error en fetchAttendance: " . $e->getMessage());
+            return null;
+        }
+    }
+
 }

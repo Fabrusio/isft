@@ -291,4 +291,9 @@ class TeacherController
         }
     }
 
+    public static function getAllStudentDataAttendance($idSubject, $idMonth, $idStudent) {
+        $attendance = TeacherModel::fetchStudentAttendance($idSubject, $idMonth, $idStudent);
+        return $attendance;
+    }
+
 }
