@@ -6,6 +6,7 @@ if (
       ($_GET['pages'] == "mySubjects") ||
       ($_GET['pages'] == "manageStudentSubject") ||
       ($_GET['pages'] == "myAttendance") ||
+      ($_GET['pages'] == "manageStudentAttendance") ||
       # links administracion de Usuarios    
       ($_GET['pages'] == "myData") ||
       ($_GET['pages'] == "changedPasswordStart") ||

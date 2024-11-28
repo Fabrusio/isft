@@ -237,4 +237,83 @@ class TeacherModel extends UserModel
         $stmt = null;
     }
 
+    public static function fetchStudentAttendance($idSubject, $idMonth, $idStudent) {
+        $sql = "SELECT monthly_attendance, id_student_attendance
+                FROM student_attendances
+                WHERE fk_subject_id = :id_subject 
+                  AND fk_month_id = :id_month 
+                  AND fk_student_id = :id_student";
+    
+        try {
+            $stmt = model_sql::connectToDatabase()->prepare($sql);
+            $stmt->bindParam(':id_subject', $idSubject, PDO::PARAM_INT);
+            $stmt->bindParam(':id_month', $idMonth, PDO::PARAM_INT);
+            $stmt->bindParam(':id_student', $idStudent, PDO::PARAM_INT);
+    
+            $stmt->execute();
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+            $stmt = null;
+            return $result;
+        } catch (PDOException $e) {
+            error_log("Error en fetchAttendance: " . $e->getMessage());
+            return null;
+        }
+    }
+
+    public static function insertStudentAttendance($id_subject, $id_month, $id_student, $attendance){
+        $sql = "INSERT INTO student_attendances (fk_subject_id, fk_month_id, fk_student_id, monthly_attendance)
+        VALUES (:id_subject, :id_month, :id_student, :attendance)";
+        $stmt = model_sql::connectToDatabase()->prepare($sql);
+        $stmt->bindParam(':id_subject', $id_subject, PDO::PARAM_INT);
+        $stmt->bindParam(':id_month', $id_month, PDO::PARAM_INT);
+        $stmt->bindParam(':id_student', $id_student, PDO::PARAM_INT);
+        $stmt->bindParam(':attendance', $attendance, PDO::PARAM_INT);
+
+        if ($stmt->execute()) {
+            return $stmt;
+        } else {
+            print_r($stmt->errorInfo());
+        }
+    }
+
+    public static function getMonthlyAttendance($idSubject, $idMonth) {
+        $sql = "SELECT monthly_attendance
+                FROM teacher_attendances
+                WHERE fk_subject_id = :id_subject 
+                  AND fk_month_id = :id_month";
+    
+        try {
+            $stmt = model_sql::connectToDatabase()->prepare($sql);
+            $stmt->bindParam(':id_subject', $idSubject, PDO::PARAM_INT);
+            $stmt->bindParam(':id_month', $idMonth, PDO::PARAM_INT);
+    
+            $stmt->execute();
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+            $stmt = null;
+            return $result;
+        } catch (PDOException $e) {
+            error_log("Error en fetchAttendance: " . $e->getMessage());
+            return null;
+        }
+    }
+
+    static public function editStudentAttendance($attendance, $id)
+    {
+        $sql = "UPDATE student_attendances SET monthly_attendance = :attendance 
+                WHERE id_student_attendance = :id";
+        $stmt = model_sql::connectToDatabase()->prepare($sql);
+        $stmt->bindParam(':attendance', $attendance, PDO::PARAM_INT);
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+
+        if ($stmt->execute()) {
+            return true;
+        } else {
+            print_r($stmt->errorInfo());
+            return false;
+        }
+        $stmt = null;
+    }
+
 }

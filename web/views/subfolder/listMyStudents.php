@@ -32,6 +32,10 @@ $dataStudent = TeacherController::getAllSubjectStudents($_GET['id_subject']);
                                     <a href="#addNoteModal<?php echo $student['id_student']; ?>" class="btn btn-primary add-note-student" data-toggle="modal" title="Asignar nota">
                                         <i class="fas fa-plus"></i>
                                     </a>
+
+                                    <a href="index.php?pages=manageStudentAttendance&id_subject=<?php echo $_GET['id_subject']; ?>&name_subject=<?php echo $_GET['name_subject']; ?>&id_student=<?php echo $student['id_student']; ?>&name_student=<?php echo $student['name_student']; ?>" class="btn btn-dark" title="Asistencia del alumno">
+                                        <i class="fas fa-clock"></i>
+                                    </a>
                                 </td>
                             <?php endif; ?>
                         </tr>
