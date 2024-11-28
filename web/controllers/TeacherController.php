@@ -237,6 +237,13 @@ class TeacherController
 
     public static function insertAttendance($id_subject, $id_month, $id_teacher, $attendance){
         
+        if (!is_numeric($attendance)) {
+            return [
+                "status" => "error",
+                "message" => "Para guardar la asistencia debe ingresarse un número."
+            ];
+        }
+
         if($attendance > 40){
             $response["status"] = "error";
             $response["message"] = "Ingrese una cantidad de horas menor.";
@@ -265,6 +272,13 @@ class TeacherController
     
     public static function editAttendance($attendance, $id){
         
+        if (!is_numeric($attendance)) {
+            return [
+                "status" => "error",
+                "message" => "Para guardar la asistencia debe ingresarse un número."
+            ];
+        }
+
         if($attendance > 40){
             $response["status"] = "error";
             $response["message"] = "Ingrese una cantidad de horas menor.";
@@ -294,6 +308,85 @@ class TeacherController
     public static function getAllStudentDataAttendance($idSubject, $idMonth, $idStudent) {
         $attendance = TeacherModel::fetchStudentAttendance($idSubject, $idMonth, $idStudent);
         return $attendance;
+    }
+
+    public static function insertStudentAttendance($id_subject, $id_month, $id_student, $attendance) {
+
+        if (!is_numeric($attendance)) {
+            return [
+                "status" => "error",
+                "message" => "Para guardar la asistencia debe ingresarse un número."
+            ];
+        }
+
+        if($attendance < 0){
+            $response["status"] = "error";
+            $response["message"] = "No se pueden ingresar valores negativos.";
+            return $response;
+        }
+
+        $monthlyAttendance = TeacherModel::getMonthlyAttendance($id_subject, $id_month);
+    
+        if ($attendance > $monthlyAttendance['monthly_attendance']) {
+            $response["status"] = "error";
+            if($monthlyAttendance['monthly_attendance'] === null){
+                $response["message"] = "El horario total del mes aún no fue ingresado.";
+                return $response;
+            }else{
+                $response["message"] = "La asistencia no puede ser mayor al total mensual de la materia: " . $monthlyAttendance['monthly_attendance'] . " horas.";
+                return $response;
+            }
+        }
+    
+        $execute = TeacherModel::insertStudentAttendance($id_subject, $id_month, $id_student, $attendance);
+    
+        if ($execute) {
+            $response['title'] = "¡Actualizado!";
+            $response["status"] = "successLoad";
+            $response["message"] = "Se guardaron los datos correctamente.";
+            return $response;
+        } else {
+            $response["status"] = "error";
+            $response["message"] = "Hubo un problema en el ingreso.";
+            return $response;
+        }
+    }
+
+    public static function editStudentAttendance($attendance, $id, $id_subject, $id_month) {
+        
+        if (!is_numeric($attendance)) {
+            return [
+                "status" => "error",
+                "message" => "Para guardar la asistencia debe ingresarse un número."
+            ];
+        }
+
+        if($attendance < 0){
+            $response["status"] = "error";
+            $response["message"] = "No se pueden ingresar valores negativos.";
+            return $response;
+        }
+
+        $monthlyAttendance = TeacherModel::getMonthlyAttendance($id_subject, $id_month);
+    
+        if ($attendance > $monthlyAttendance['monthly_attendance']) {
+            $response["status"] = "error";
+            $response["message"] = "La asistencia no puede ser mayor al total mensual de la materia: " . $monthlyAttendance['monthly_attendance'] . " horas.";
+            return $response;
+        }
+        
+        $execute = TeacherModel::editStudentAttendance($attendance, $id);
+
+        if ($execute) {
+            $response['title'] = "¡Actualizado!";
+            $response["status"] = "successLoad";
+            $response["message"] = "Se guardaron los datos correctamente.";
+            return $response;
+        } else {
+            $response["status"] = "error";
+            $response["message"] = "Hubo un problema en el ingreso.";
+            return $response;
+        }
     }
 
 }
