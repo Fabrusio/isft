@@ -3,9 +3,12 @@
     $dataMonths = TeacherController::getAllMonths();
     ?>
     <div class="row pt-4">
-                <div class="col-10">
+                <div class="col-4">
                 </div>
-                <div class="col-2 text-center">
+                <div class="col-4 text-center">
+                    <h2 class="ml-4">Gestionar mi asistencia</h2>
+                </div>
+                <div class="col-4 text-center">
                     <a href="index.php?pages=mySubjects" class="btn btn-info mb-3" title="Volver atrás">
                         <i class="fas fa-arrow-left"></i> Volver
                     </a>
@@ -75,7 +78,7 @@
 
                         <div class="form-group">
                             <label for="schedule">Cantidad total de horas asistidas en el mes</label>
-                            <input type="number" min="0" class="form-control" id="attendance" name="attendance" value="<?php echo $dataAttendance['monthly_attendance']; ?>">
+                            <input type="text" oninput="this.value = this.value.replace(/[^0-9,.]/g, '').replace(/(,.*),/g, '$1');" class="form-control reset" name="attendance" value="<?php echo $dataAttendance['monthly_attendance']; ?>">
                         </div>
                         <button type="submit" class="btn btn-success ladda-button">Guardar cambios</button>
                         <div class="response-message text-center"></div>
@@ -105,7 +108,7 @@
 
                         <div class="form-group">
                             <label for="schedule">Cantidad total de horas asistidas en el mes</label>
-                            <input type="number" min="0" class="form-control" id="attendance" name="attendance" value="<?php echo $dataAttendance['monthly_attendance']; ?>">
+                            <input type="text" oninput="this.value = this.value.replace(/[^0-9,.]/g, '').replace(/(,.*),/g, '$1');" class="form-control reset" name="attendance" value="<?php echo $dataAttendance['monthly_attendance']; ?>">
                         </div>
                         <button type="submit" class="btn btn-primary ladda-button">Guardar cambios</button>
                         <div class="response-message text-center"></div>
