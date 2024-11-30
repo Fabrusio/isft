@@ -21,7 +21,7 @@
                         <i class="fas fa-id-card"></i> Mis datos
                     </a>
                 <?php if($_SESSION['fk_rol_id'] == 4): ?>
-                <a class="dropdown-item" href="#" download="">
+                <a class="dropdown-item" href="/public/img/Manual de uso (profesor) - ISFT 177.pdf" download="Manual de uso - ISFT 177">
                     <i class="fas fa-book"></i> Descargar manual de usuario
                 </a>
                 <?php endif;?>
