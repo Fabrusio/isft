@@ -65,7 +65,7 @@
 
                         <div class="form-group">
                             <label for="schedule">Cantidad total de horas asistidas en el mes</label>
-                            <input type="number" min="0" class="form-control" id="attendance" name="attendance" value="<?php echo $dataAttendance['monthly_attendance']; ?>">
+                            <input type="text" maxlength="5" oninput="this.value = this.value.replace(/[^0-9,.]/g, '').replace(/(,.*),/g, '$1');" class="form-control reset" name="attendance" value="<?php echo $dataAttendance['monthly_attendance']; ?>">
                         </div>
                         <button type="submit" class="btn btn-success ladda-button">Guardar cambios</button>
                         <div class="response-message text-center"></div>
@@ -95,7 +95,7 @@
 
                         <div class="form-group">
                             <label for="schedule">Cantidad total de horas asistidas en el mes</label>
-                            <input type="number" min="0" class="form-control" id="attendance" name="attendance" value="<?php echo $dataAttendance['monthly_attendance']; ?>">
+                            <input type="text" maxlength="5" oninput="this.value = this.value.replace(/[^0-9,.]/g, '').replace(/(,.*),/g, '$1');" class="form-control reset" name="attendance" value="<?php echo $dataAttendance['monthly_attendance']; ?>">
                         </div>
                         <button type="submit" class="btn btn-primary ladda-button">Guardar cambios</button>
                         <div class="response-message text-center"></div>

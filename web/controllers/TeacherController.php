@@ -237,10 +237,28 @@ class TeacherController
 
     public static function insertAttendance($id_subject, $id_month, $id_teacher, $attendance){
         
+        $attendance = str_replace(',', '.', $attendance);
+
+        if (strlen($attendance) > 5) {
+            return [
+                "status" => "error",
+                "message" => "No se puede ingresar más de 5 caracteres."
+            ];
+        }
+
         if (!is_numeric($attendance)) {
             return [
                 "status" => "error",
                 "message" => "Para guardar la asistencia debe ingresarse un número."
+            ];
+        }
+
+        list($hours, $minutes) = array_pad(explode('.', $attendance), 2, null);
+
+        if (!is_null($minutes) && (int)$minutes > 59) {
+            return [
+                "status" => "error",
+                "message" => "Los minutos no pueden exceder de 59."
             ];
         }
 
@@ -272,10 +290,28 @@ class TeacherController
     
     public static function editAttendance($attendance, $id){
         
+        $attendance = str_replace(',', '.', $attendance);
+
+        if (strlen($attendance) > 5) {
+            return [
+                "status" => "error",
+                "message" => "No se puede ingresar más de 5 caracteres."
+            ];
+        }
+
         if (!is_numeric($attendance)) {
             return [
                 "status" => "error",
                 "message" => "Para guardar la asistencia debe ingresarse un número."
+            ];
+        }
+
+        list($hours, $minutes) = array_pad(explode('.', $attendance), 2, null);
+
+        if (!is_null($minutes) && (int)$minutes > 59) {
+            return [
+                "status" => "error",
+                "message" => "Los minutos no pueden exceder de 59."
             ];
         }
 
@@ -312,10 +348,28 @@ class TeacherController
 
     public static function insertStudentAttendance($id_subject, $id_month, $id_student, $attendance) {
 
+        $attendance = str_replace(',', '.', $attendance);
+
+        if (strlen($attendance) > 5) {
+            return [
+                "status" => "error",
+                "message" => "No se puede ingresar más de 5 caracteres."
+            ];
+        }
+
         if (!is_numeric($attendance)) {
             return [
                 "status" => "error",
                 "message" => "Para guardar la asistencia debe ingresarse un número."
+            ];
+        }
+
+        list($hours, $minutes) = array_pad(explode('.', $attendance), 2, null);
+
+        if (!is_null($minutes) && (int)$minutes > 59) {
+            return [
+                "status" => "error",
+                "message" => "Los minutos no pueden exceder de 59."
             ];
         }
 
@@ -354,10 +408,28 @@ class TeacherController
 
     public static function editStudentAttendance($attendance, $id, $id_subject, $id_month) {
         
+        $attendance = str_replace(',', '.', $attendance);
+
+        if (strlen($attendance) > 5) {
+            return [
+                "status" => "error",
+                "message" => "No se puede ingresar más de 5 caracteres."
+            ];
+        }
+
         if (!is_numeric($attendance)) {
             return [
                 "status" => "error",
                 "message" => "Para guardar la asistencia debe ingresarse un número."
+            ];
+        }
+
+        list($hours, $minutes) = array_pad(explode('.', $attendance), 2, null);
+
+        if (!is_null($minutes) && (int)$minutes > 59) {
+            return [
+                "status" => "error",
+                "message" => "Los minutos no pueden exceder de 59."
             ];
         }
 
